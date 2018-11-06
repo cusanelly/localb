@@ -1,94 +1,207 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<localb.Models.Ad_List>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+@{
+    ViewData["Title"] = "Index";
+    var dataHeader = Model.FirstOrDefault().data;
+;}
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+            <tr> 
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.visible)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.hidden_by_opening_hours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.location_)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.countrycode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.city)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.trade_type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.online_provider)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.first_time_limit_btc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.volume_coefficient_btc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.sms_verification_required)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.reference_type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.display_reference)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.currency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.min_amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount_available)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.limit_to_fiat_amounts)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ad_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.temp_price_usd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ing)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_feedback_score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trade_volume)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trusted_by_advertiser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.payment_window_minutes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.bank_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.track_max_amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.atm_model)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {            
+            <tr>
+                <td>
+                    @item.data.visible
+                </td>
+                <td>
+                    @item.data.hidden_by_opening_hours
+                </td>
+                <td>
+                    @item.data.location_
+                </td>
+                <td>
+                    @item.data.countrycode
+                </td>
+                <td>
+                    @item.data.city
+                </td>
+                <td>
+                    @item.data.trade_type
+                </td>
+                <td>
+                    @item.data.online_provider
+                </td>
+                <td>
+                    @item.data.first_time_limit_btc
+                </td>
+                <td>
+                    @item.data.volume_coefficient_btc
+                </td>
+                <td>
+                    @item.data.sms_verification_required
+                </td>
+                <td>
+                    @item.data.reference_type
+                </td>
+                <td>
+                    @item.data.display_reference
+                </td>
+                <td>
+                    @item.data.currency
+                </td>
+                <td>
+                    @item.data.lat
+                </td>
+                <td>
+                    @item.data.lon
+                </td>
+                <td>
+                    @item.data.min_amount
+                </td>
+                <td>
+                    @item.data.max_amount
+                </td>
+                <td>
+                    @item.data.max_amount_available
+                </td>
+                <td>
+                    @item.data.limit_to_fiat_amounts
+                </td>
+                <td>
+                    @item.data.ad_id
+                </td>
+                <td>
+                    @item.data.temp_price_usd
+                </td>
+                <td>
+                    @item.data.ing
+                </td>
+                <td>
+                    @item.data.require_feedback_score
+                </td>
+                <td>
+                    @item.data.require_trade_volume
+                </td>
+                <td>
+                    @item.data.require_trusted_by_advertiser
+                </td>
+                <td>
+                    @item.data.payment_window_minutes
+                </td>
+                <td>
+                    @item.data.bank_name
+                </td>
+                <td>
+                    @item.data.track_max_amount
+                </td>
+                <td>
+                    @item.data.atm_model
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.data.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.data.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.data.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+        
+    </tbody>
+    
+</table>
