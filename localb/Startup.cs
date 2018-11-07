@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using localb.Entities;
+using localb.Models;
 
 namespace localb
 {
@@ -31,8 +33,13 @@ namespace localb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // Entities
+            services.Configure<EmailList>(Configuration.GetSection("EmailList"));
+            services.Configure<LocalBSettings>(Configuration.GetSection("LocalB"));
+            services.AddSingleton<IHttpCalls,HttpCalls>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

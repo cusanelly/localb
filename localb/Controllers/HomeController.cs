@@ -15,20 +15,25 @@ namespace localb.Controllers
     {       
         const string URL = "https://localbitcoins.com";
         const string URLENDPOINT = "/buy-bitcoins-online";
-        public IActionResult Index()
+        private readonly IHttpCalls _HttpCalls;
+        public HomeController(IHttpCalls httpcalls)
         {
-            HMACSHA256 hash = new HMACSHA256();
-            HttpClient client = new HttpClient();
-            string url = $"{URL}{URLENDPOINT}/VE/Venezuela/.json";
-            var response = client.GetStringAsync(url).Result;
-            Rootobject result = JsonConvert.DeserializeObject<Rootobject>(response);
-            return View(result.data.ad_list);
+            _HttpCalls = httpcalls;
         }
-        public IActionResult Pagination(int page)
+        public async Task<IActionResult> Index()
         {
-            HMACSHA256 hash = new HMACSHA256();
+            var result = await _HttpCalls.BuyOnline();
+            return View(result.data.ad_list);
+        }        
+        //public async Task<IActionResult> Index()
+        //{
+        //    var result = await _HttpCalls.BuyOnline();
+        //    return View(result.d);
+        //}
+        public IActionResult Pagination(int page)
+        {            
             HttpClient client = new HttpClient();
-            string url = $"{URL}{URLENDPOINT}/VE/Venezuela/.json?page={page}";
+            string url = $"{URL}/api/payment_methods/";
             var response = client.GetStringAsync(url).Result;
             return View(response);
         }

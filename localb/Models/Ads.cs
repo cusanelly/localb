@@ -36,7 +36,7 @@ namespace localb.Models
     {
         public string visible { get; set; }
         public string hidden_by_opening_hours { get; set; }
-        public string location_ { get; set; }
+        public string location_string { get; set; }
         public string countrycode { get; set; }
         public string city { get; set; }
         public string trade_type { get; set; }
@@ -54,6 +54,7 @@ namespace localb.Models
         public string max_amount_available { get; set; }
         public string limit_to_fiat_amounts { get; set; }
         public string ad_id { get; set; }
+        public string temp_price { get; set; }
         public string temp_price_usd { get; set; }
         public string ing { get; set; }
         public Profile profile { get; set; }
@@ -64,6 +65,7 @@ namespace localb.Models
         public string bank_name { get; set; }
         public string track_max_amount { get; set; }
         public string atm_model { get; set; }
+        public string msg { get; set; }
     }
 
     public class Profile
