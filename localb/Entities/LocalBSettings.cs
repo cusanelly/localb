@@ -9,6 +9,7 @@ namespace localb.Entities
     public class LocalBSettings
     {
         public string ApiKey { get; set; }
+        public string ApiSecret { get; set; }
         public string Url { get; set; }
         public string BuyOnlineEndpoint { get; set; }
         public string Countries { get; set; }

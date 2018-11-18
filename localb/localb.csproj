@@ -6,10 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LocalBitcoinsApi" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LocalBitcoinsApi">
+      <HintPath>..\..\LocalBitcoinsApi\src\LocalBitcoinsApi\bin\Release\netstandard2.0\LocalBitcoinsApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

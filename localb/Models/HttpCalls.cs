@@ -8,40 +8,60 @@ using Newtonsoft.Json;
 using localb.Entities;
 using Microsoft.Extensions.Options;
 using System.Net;
+using LocalBitcoins;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 
 namespace localb.Models
-{
+{    
     public interface IHttpCalls
     {
-        Task<Rootobject> BuyOnline();
-        //Task<string> BuyOnline();
+        Task<IEnumerable<Ad_List>> BuyOnline(string next = "", int max = 10);
+        
     }
     public class HttpCalls : IHttpCalls
-    {
+    {        
         private readonly IOptions<LocalBSettings> _localBSettings;
         public string Url { get; set; }
+        public List<Ad_List> Prospects { get; }
         public HttpCalls(IOptions<LocalBSettings> localBSeetings)
         {
             _localBSettings = localBSeetings;
             Url = $"{_localBSettings.Value.Url}/{_localBSettings.Value.BuyOnlineEndpoint}";
-        }
-
-        public async Task<Rootobject> BuyOnline()
+            Prospects = new List<Ad_List>();
+        }       
+        public async Task<IEnumerable<Ad_List>> BuyOnline(string next = "", int max = 10)
         {
-            //API Key
-            HMACSHA256 hash = new HMACSHA256();
-            // API Nonce
-            int timestamp = DateTime.Now.Millisecond;
-            //API Signature
+            //LocalBitcoinsClient Client = new LocalBitcoinsClient(_localBSettings.Value.ApiKey, _localBSettings.Value.ApiSecret);
+            //var res = await Client.PublicMarket_BuyBitcoinsOnlineByCurrency("ves");            
             var client = new HttpClient();
-            WebHeaderCollection headers = new WebHeaderCollection
-            {
-                
-                { "",""}
-            };
-            var response = await client.GetStringAsync(Url + "/ve/Venezuela/.json?fields=location_string,temp_price,currency,min_amount,max_amount,temp_price_usd,bank_name,msg");
-            return JsonConvert.DeserializeObject<Rootobject>(response);
-            //return response;
-        }
+            var response = (String.IsNullOrEmpty(next)) ?
+                await client.GetStringAsync(Url + "/usd/.json?fields=profile,location_string,temp_price,bank_name,msg") :
+                //await client.GetStringAsync(Url + "/usd/.json") :
+                await client.GetStringAsync(next);
+            var obj = JsonConvert.DeserializeObject<Rootobject>(response);
+            //var result = obj.data.ad_list;
+            var result = obj.data.ad_list.Where(t =>
+                t.data.bank_name.ToLower().Contains("banesco") ||
+                t.data.msg.ToLower().Contains("banesco") ||
+                t.data.bank_name.ToLower().Contains("banesco panama") ||
+                t.data.msg.ToLower().Contains("banesco panama") ||
+                t.data.bank_name.ToLower().Contains("bofa") ||
+                t.data.msg.ToLower().Contains("bofa") ||
+                t.data.bank_name.ToLower().Contains("zelle") ||
+                t.data.msg.ToLower().Contains("zelle") ||
+                t.data.bank_name.ToLower().Contains("bank of america") ||
+                t.data.msg.ToLower().Contains("bank of america") ||
+                t.data.bank_name.ToLower().Contains("boa") ||
+                t.data.msg.ToLower().Contains("boa") 
+                ).Select(t => t);
+            if (result.Count() > 0)
+                Prospects.AddRange(result);
+            if (Prospects.Count() < max)            
+                await BuyOnline(next:obj.pagination.next,max: max);             
+            
+            return Prospects;            
+        }        
     }
 }

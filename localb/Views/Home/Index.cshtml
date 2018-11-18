@@ -2,214 +2,220 @@
 
 @{
     ViewData["Title"] = "Index";
-    var dataHeader = Model.FirstOrDefault().data;
+    var count = 0;
     ;}
 
 <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.visible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.hidden_by_opening_hours)
-        </th>*@
-            <th>
-                Pais
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.countrycode)
-        </th>*@
-            @*<th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.trade_type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.online_provider)
-            </th>
-
-
-        <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.volume_coefficient_btc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.sms_verification_required)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.reference_type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.display_reference)
-            </th>*@
-            <th>
-                Moneda
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lon)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.min_amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount_available)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.limit_to_fiat_amounts)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ad_id)
-        </th>*@
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.temp_price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.temp_price_usd)
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ing)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_feedback_score)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trade_volume)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trusted_by_advertiser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.payment_window_minutes)
-        </th>*@
-            <th>
-                Banco
-            </th>
-            @*<th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.track_max_amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.atm_model)
-        </th>*@
-            <th>Message</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div>
+    <p>
+        Count: @Model.Count()
+        @Html.ActionLink("Buscar mejores 100","index",new { page = 100})
+    </p>
+</div>
+<div>
+    <table class="table">
+        <thead>
             <tr>
-                @*<td>
-                        @item.data.visible
-                    </td>
-                    <td>
-                        @item.data.hidden_by_opening_hours
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.visible)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.hidden_by_opening_hours)
+                    </th>*@
+                <th>
+                    Nro
+                </th>
+                <th>
+                    Username
+                </th>
+                <th>
+                    Pais
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.countrycode)
+                    </th>*@
+                @*<th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.city)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.trade_type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.online_provider)
+                        </th>
 
-                    </td>*@
-                <td>
-                    @item.data.location_string
-                </td>
-                @*<td>
-                        @item.data.countrycode
-                    </td>
-                <td>
-                        @item.data.city
-                    </td>
-                    <td>
-                        @item.data.trade_type
-                    </td>
-                    <td>
-                        @item.data.online_provider
-                    </td>
-                    <td>
-                        @item.data.first_time_limit_btc
-                    </td>
-                    <td>
-                        @item.data.volume_coefficient_btc
-                    </td>
-                    <td>
-                        @item.data.sms_verification_required
-                    </td>
-                    <td>
-                        @item.data.reference_type
-                    </td>
-                    <td>
-                        @item.data.display_reference
-                    </td>*@
-                <td>
-                    @item.data.currency
-                </td>
-                @*<td>
-                        @item.data.lat
-                    </td>
-                    <td>
-                        @item.data.lon
-                    </td>*@
-                <td>
-                    @item.data.min_amount
-                </td>
-                <td>
-                    @item.data.max_amount
-                </td>
-                <td>
-                    @item.data.temp_price
-                </td>
-                @*<td>
-                        @item.data.max_amount_available
-                    </td>
-                    <td>
-                        @item.data.limit_to_fiat_amounts
-                    </td>
-                    <td>
-                        @item.data.ad_id
-                    </td>*@
-                <td>
-                    @item.data.temp_price_usd
-                </td>
-                @*<td>
-                        @item.data.ing
-                    </td>
-                    <td>
-                        @item.data.require_feedback_score
-                    </td>
-                    <td>
-                        @item.data.require_trade_volume
-                    </td>
-                    <td>
-                        @item.data.require_trusted_by_advertiser
-                    </td>
-                    <td>
-                        @item.data.payment_window_minutes
-                    </td>*@
-                <td>
-                    @item.data.bank_name
-                </td>
-                @*<td>
-                        @item.data.track_max_amount
-                    </td>*@
-                @*<td>
-                        @item.data.atm_model
-                    </td>*@
-                <td>
-                    @item.data.msg
-                </td>
-                <td>
-                    <a href="@item.actions.public_view" target="_blank">Link</a>
-                </td>
+
+                    <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.volume_coefficient_btc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.sms_verification_required)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.reference_type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.display_reference)
+                        </th>*@
+                <th>
+                    Moneda
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.lon)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.min_amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.max_amount_available)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.limit_to_fiat_amounts)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ad_id)
+                    </th>*@
+                <th>
+                    Precio
+                </th>
+                @*<th>
+                            @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.temp_price_usd)
+                        </th>
+                        <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ing)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_feedback_score)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trade_volume)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.require_trusted_by_advertiser)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.payment_window_minutes)
+                    </th>*@
+                <th>
+                    Banco
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.track_max_amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.atm_model)
+                    </th>*@
+                <th>Message</th>
+                <th>Link</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    @*<td>
+                            @item.data.visible
+                        </td>
+                        <td>
+                            @item.data.hidden_by_opening_hours
 
-    </tbody>
-
-</table>
+                        </td>*@
+                    <td>@count</td>
+                    <td>@item.data.profile.username</td>
+                    <td>
+                        @item.data.location_string
+                    </td>
+                    @*<td>
+                                @item.data.countrycode
+                            </td>
+                        <td>
+                                @item.data.city
+                            </td>
+                            <td>
+                                @item.data.trade_type
+                            </td>
+                            <td>
+                                @item.data.online_provider
+                            </td>
+                            <td>
+                                @item.data.first_time_limit_btc
+                            </td>
+                            <td>
+                                @item.data.volume_coefficient_btc
+                            </td>
+                            <td>
+                                @item.data.sms_verification_required
+                            </td>
+                            <td>
+                                @item.data.reference_type
+                            </td>
+                            <td>
+                                @item.data.display_reference
+                            </td>*@
+                    <td>
+                        @item.data.currency
+                    </td>
+                    @*<td>
+                            @item.data.lat
+                        </td>
+                        <td>
+                            @item.data.lon
+                        </td>*@
+                    <td>
+                        @item.data.temp_price
+                    </td>
+                    @*<td>
+                            @item.data.max_amount_available
+                        </td>
+                        <td>
+                            @item.data.limit_to_fiat_amounts
+                        </td>
+                        <td>
+                            @item.data.ad_id
+                        </td>
+                            <td>
+                                @item.data.temp_price_usd
+                            </td>
+                            <td>
+                            @item.data.ing
+                        </td>
+                        <td>
+                            @item.data.require_feedback_score
+                        </td>
+                        <td>
+                            @item.data.require_trade_volume
+                        </td>
+                        <td>
+                            @item.data.require_trusted_by_advertiser
+                        </td>
+                        <td>
+                            @item.data.payment_window_minutes
+                        </td>*@
+                    <td>
+                        @item.data.bank_name
+                    </td>
+                    @*<td>
+                            @item.data.track_max_amount
+                        </td>*@
+                    @*<td>
+                            @item.data.atm_model
+                        </td>*@
+                    <td>
+                        @item.data.msg
+                    </td>
+                    <td>
+                        <a href="@item.actions.public_view" target="_blank">Link</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

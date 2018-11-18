@@ -20,22 +20,22 @@ namespace localb.Controllers
         {
             _HttpCalls = httpcalls;
         }
-        public async Task<IActionResult> Index()
-        {
-            var result = await _HttpCalls.BuyOnline();
-            return View(result.data.ad_list);
+        public async Task<IActionResult> Index(int? page)
+        {            
+            IEnumerable<Ad_List> result = (page.HasValue) 
+                ? await _HttpCalls.BuyOnline(max: page.Value)
+                : await _HttpCalls.BuyOnline();           
+            return View("Index", result);
         }        
         //public async Task<IActionResult> Index()
         //{
         //    var result = await _HttpCalls.BuyOnline();
         //    return View(result.d);
         //}
-        public IActionResult Pagination(int page)
-        {            
-            HttpClient client = new HttpClient();
-            string url = $"{URL}/api/payment_methods/";
-            var response = client.GetStringAsync(url).Result;
-            return View(response);
+        public async Task<IActionResult> Pagination(int page)
+        {
+            var result = await _HttpCalls.BuyOnline(max:page);
+            return View("Index", result);            
         }
 
         public IActionResult About()
