@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using localb.Models;
-using System.Security.Cryptography;
-using System.Net.Http;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace localb.Controllers
 {
+    
     public class HomeController : Controller
-    {       
-        const string URL = "https://localbitcoins.com";
-        const string URLENDPOINT = "/buy-bitcoins-online";
+    {
+        private string URL { get; set; }
+        private string URLENDPOINT { get; set; }
         private readonly IHttpCalls _HttpCalls;
         public HomeController(IHttpCalls httpcalls)
         {
             _HttpCalls = httpcalls;
-        }
+        }        
         public async Task<IActionResult> Index(int? page)
         {            
             IEnumerable<Ad_List> result = (page.HasValue) 
@@ -37,7 +35,7 @@ namespace localb.Controllers
             var result = await _HttpCalls.BuyOnline(max:page);
             return View("Index", result);            
         }
-
+        
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

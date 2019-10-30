@@ -262,4 +262,5 @@ __pycache__/
 
 # appsettings JSON file
 appsettings.json
+appsettings.Development.json
 /localb/Properties/PublishProfiles/venezuela - Web Deploy.pubxml

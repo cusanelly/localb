@@ -42,6 +42,9 @@ namespace localb.Models
                 await client.GetStringAsync(next);
             var obj = JsonConvert.DeserializeObject<Rootobject>(response);
             //var result = obj.data.ad_list;
+
+            #region FILTER KEYWORD
+            // Filtramos los resultados
             var result = obj.data.ad_list.Where(t =>
                 t.data.bank_name.ToLower().Contains("banesco") ||
                 t.data.msg.ToLower().Contains("banesco") ||
@@ -56,6 +59,8 @@ namespace localb.Models
                 t.data.bank_name.ToLower().Contains("boa") ||
                 t.data.msg.ToLower().Contains("boa") 
                 ).Select(t => t);
+            #endregion
+
             if (result.Count() > 0)
                 Prospects.AddRange(result);
             if (Prospects.Count() < max)            

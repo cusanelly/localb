@@ -39,6 +39,8 @@ namespace localb
             // Entities
             services.Configure<EmailList>(Configuration.GetSection("EmailList"));
             services.Configure<LocalBSettings>(Configuration.GetSection("LocalB"));
+            //Manage User Secrets
+            services.Configure<GoogleAccess>(Configuration.GetSection("GoogleAccess"));
             services.AddSingleton<IHttpCalls,HttpCalls>();
         }
 
@@ -46,7 +48,7 @@ namespace localb
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
-            {
+            {               
                 app.UseDeveloperExceptionPage();
             }
             else
