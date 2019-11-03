@@ -3,8 +3,8 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    color:#999;
-    background-color:#000;
+    color: #999;
+    background-color: #000;
 }
 
 /* Wrapping element */
@@ -35,5 +35,11 @@ body {
     /* Hide captions */
     .carousel-caption {
         display: none;
+    }
+
+    @-moz-document url-prefix() {
+        fieldset {
+            display: table-cell;
+        }
     }
 }

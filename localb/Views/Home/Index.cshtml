@@ -11,9 +11,10 @@
     <p>
         Count: @Model.Count()
         @Html.ActionLink("Buscar mejores 100","index",new { page = 100})
+        
     </p>
 </div>
-<div>
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -26,10 +27,10 @@
                 <th>
                     Nro
                 </th>
-                <th>
+                <th >
                     Username
                 </th>
-                <th>
+                <th >
                     Pais
                 </th>
                 @*<th>
@@ -58,7 +59,7 @@
                         <th>
                             @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.display_reference)
                         </th>*@
-                <th>
+                <th >
                     Moneda
                 </th>
                 @*<th>
@@ -82,7 +83,7 @@
                     <th>
                         @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.ad_id)
                     </th>*@
-                <th>
+                <th >
                     Precio
                 </th>
                 @*<th>
@@ -103,7 +104,7 @@
                     <th>
                         @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.payment_window_minutes)
                     </th>*@
-                <th>
+                <th >
                     Banco
                 </th>
                 @*<th>
@@ -112,7 +113,7 @@
                     <th>
                         @Html.DisplayNameFor(Model => Model.FirstOrDefault().data.atm_model)
                     </th>*@
-                <th>Message</th>
+                @*<th>Message</th>*@
                 <th>Link</th>
             </tr>
         </thead>
@@ -208,9 +209,9 @@
                     @*<td>
                             @item.data.atm_model
                         </td>*@
-                    <td>
+                    @*<td>
                         @item.data.msg
-                    </td>
+                    </td>*@
                     <td>
                         <a href="@item.actions.public_view" target="_blank">Link</a>
                     </td>
