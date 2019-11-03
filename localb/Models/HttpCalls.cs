@@ -17,35 +17,34 @@ namespace localb.Models
 {    
     public interface IHttpCalls
     {
-        Task<IEnumerable<Ad_List>> BuyOnline(string next = "", int max = 10);
+        Task<IEnumerable<Ad_List>> BuyOnline(int max = 10);
         
     }
     public class HttpCalls : IHttpCalls
     {        
         private readonly IOptions<LocalBSettings> _localBSettings;
         public string Url { get; set; }
-        public List<Ad_List> Prospects { get; }
+        public List<Ad_List> Prospects { get; set; }
+        public string Next { get; set; }
+        int count = 0;
         public HttpCalls(IOptions<LocalBSettings> localBSeetings)
         {
             _localBSettings = localBSeetings;
             Url = $"{_localBSettings.Value.Url}/{_localBSettings.Value.BuyOnlineEndpoint}";
             Prospects = new List<Ad_List>();
         }       
-        public async Task<IEnumerable<Ad_List>> BuyOnline(string next = "", int max = 10)
-        {
-            //LocalBitcoinsClient Client = new LocalBitcoinsClient(_localBSettings.Value.ApiKey, _localBSettings.Value.ApiSecret);
-            //var res = await Client.PublicMarket_BuyBitcoinsOnlineByCurrency("ves");            
+        public async Task<IEnumerable<Ad_List>> BuyOnline(int max = 10)
+        {                 
             var client = new HttpClient();
-            var response = (String.IsNullOrEmpty(next)) ?
-                await client.GetStringAsync(Url + "/usd/.json?fields=profile,location_string,temp_price,bank_name,msg") :
-                //await client.GetStringAsync(Url + "/usd/.json") :
-                await client.GetStringAsync(next);
-            var obj = JsonConvert.DeserializeObject<Rootobject>(response);
-            //var result = obj.data.ad_list;
 
+            var response = (String.IsNullOrEmpty(Next)) ?
+                await client.GetStringAsync(Url + "/usd/.json?fields=profile,location_string,temp_price,bank_name,msg") :                
+                await client.GetStringAsync(Next);
+            var obj = JsonConvert.DeserializeObject<Rootobject>(response);
+            IEnumerable<Ad_List> ad_Lists;
             #region FILTER KEYWORD
             // Filtramos los resultados
-            var result = obj.data.ad_list.Where(t =>
+            IEnumerable<Ad_List> result = obj.data.ad_list.Where(t =>
                 t.data.bank_name.ToLower().Contains("banesco") ||
                 t.data.msg.ToLower().Contains("banesco") ||
                 t.data.bank_name.ToLower().Contains("banesco panama") ||
@@ -61,10 +60,13 @@ namespace localb.Models
                 ).Select(t => t);
             #endregion
 
+
+            Next = obj.pagination.next;
             if (result.Count() > 0)
+                count++;
                 Prospects.AddRange(result);
-            if (Prospects.Count() < max)            
-                await BuyOnline(next:obj.pagination.next,max: max);             
+            if (Prospects.Count < max)
+                await BuyOnline(max: max);
             
             return Prospects;            
         }        
