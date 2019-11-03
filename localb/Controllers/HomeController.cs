@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using localb.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace localb.Controllers
 {
@@ -24,12 +23,8 @@ namespace localb.Controllers
                 ? await _HttpCalls.BuyOnline(max: page.Value)
                 : await _HttpCalls.BuyOnline();           
             return View("Index", result);
-        }        
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _HttpCalls.BuyOnline();
-        //    return View(result.d);
-        //}
+        }      
+        
         public async Task<IActionResult> Pagination(int page)
         {
             var result = await _HttpCalls.BuyOnline(max:page);

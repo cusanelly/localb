@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
 using System.Net.Http;
 using Newtonsoft.Json;
 using localb.Entities;
 using Microsoft.Extensions.Options;
-using System.Net;
-using LocalBitcoins;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.Globalization;
+
 
 namespace localb.Models
 {    
@@ -26,7 +21,7 @@ namespace localb.Models
         public string Url { get; set; }
         public List<Ad_List> Prospects { get; set; }
         public string Next { get; set; }
-        int count = 0;
+        
         public HttpCalls(IOptions<LocalBSettings> localBSeetings)
         {
             _localBSettings = localBSeetings;
@@ -41,7 +36,7 @@ namespace localb.Models
                 await client.GetStringAsync(Url + "/usd/.json?fields=profile,location_string,temp_price,bank_name,msg") :                
                 await client.GetStringAsync(Next);
             var obj = JsonConvert.DeserializeObject<Rootobject>(response);
-            IEnumerable<Ad_List> ad_Lists;
+            
             #region FILTER KEYWORD
             // Filtramos los resultados
             IEnumerable<Ad_List> result = obj.data.ad_list.Where(t =>
@@ -62,8 +57,7 @@ namespace localb.Models
 
 
             Next = obj.pagination.next;
-            if (result.Count() > 0)
-                count++;
+            if (result.Count() > 0)                
                 Prospects.AddRange(result);
             if (Prospects.Count < max)
                 await BuyOnline(max: max);
